@@ -1,8 +1,8 @@
 
 
 
-WebBrowserPassView v2.18
-Copyright (c) 2011 - 2025 Nir Sofer
+WhoIsConnectedSniffer v1.30
+Copyright (c) 2013 - 2025 Nir Sofer
 Web site: https://www.nirsoft.net
 
 
@@ -10,16 +10,36 @@ Web site: https://www.nirsoft.net
 Description
 ===========
 
-WebBrowserPassView is a password recovery tool that reveals the passwords
-stored by the following Web browsers: Internet Explorer (Version 4.0 -
-11.0), Mozilla Firefox (All Versions), Google Chrome, Safari, and Opera.
-This tool can be used to recover your lost/forgotten password of any
-Website, including popular Web sites, like Facebook, Yahoo, Google, and
-GMail, as long as the password is stored by your Web Browser.
+WhoIsConnectedSniffer is a network discovery tool that listens to network
+packets on your network adapter using a capture driver (WinpCap or MS
+network monitor) and accumulates a list of computer and devices currently
+connected to your network. WhoIsConnectedSniffer uses various protocols
+to detect the computers connected to your network, including ARP, UDP,
+DHCP, mDNS, and BROWSER.
+For every detected computer or device, the following information is
+displayed: (Some of the fields might be empty if the information cannot
+be found inside the packets) IP Address, MAC Address, name of the
+device/computer, description, Operating System, Network Adapter Company,
+IPv6 Address.
 
-After retrieving your lost passwords, you can save them into
-text/html/csv/xml file, by using the 'Save Selected Items' option
-(Ctrl+S).
+After collecting the connected computers/devices information, you can
+easily export the list to tab-delimited/comma-delimited/xml/html file.
+
+
+
+WhoIsConnectedSniffer vs Other NirSoft Tools
+============================================
+
+As you may know, NirSoft already provides other tools (Wireless Network
+Watcher, NetBScanner) that scan the network and show the computers that
+are currently connected. As opposed to the other tools,
+WhoIsConnectedSniffer doesn't perform any scanning and it doesn't send
+any packet to the other computers. WhoIsConnectedSniffer only listens to
+the packets sent by other computers and devices, analyzes them and then
+displays the result on the main window.
+WhoIsConnectedSniffer also provides some information that the other tools
+cannot get, like operating system, description text of the computer, IPv6
+address.
 
 
 
@@ -27,20 +47,18 @@ System Requirements And Limitations
 ===================================
 
 
-* This utility works on any version of Windows, starting from Windows
-  2000, and up to Windows 11, including 64-bit systems. Older versions of
-  Windows (Windows 98/ME) are not supported, because this utility is a
-  Unicode application.
-* Currently, WebBrowserPassView cannot retrieve passwords from external
-  hard-drive (Except of Firefox Web browser). Support for that might be
-  added in future versions.
-* On Internet Explorer 7.0-9.0, the passwords are encrypted with the
-  URL of the Web site, so WebBrowserPassView uses the history file of
-  Internet Explorer to decrypt the passwords. If you clear the history of
-  Internet Explorer, WebBrowserPassView won't be able to decrypt the
-  passwords.
-* On Google Chrome - passwords originally imported from Internet
-  Explorer 7.0-9.0, cannot be decrypted.
+* Any version of Windows, starting from Windows 2000, and up to Windows
+  11. Both 32-bit and 64-bit systems are supported. When using Microsoft
+  Network Monitor driver on 64-bit system, you must use the 64-bit
+  version of WhoIsConnectedSniffer.
+* You have to install one of the following capture drivers:
+  o Npcap capture driver (based on the discontinued WinPcap library)
+  o Network Monitor driver
+
+* WhoIsConnectedSniffer cannot detect a device or computer if it
+  doesn't send any packet that is received by the computer running this
+  tool.
+* WhoIsConnectedSniffer cannot detect computers from other subnets.
 
 
 
@@ -48,363 +66,190 @@ Versions History
 ================
 
 
-* Version 2.18:
-  o Updated to decrypt the passwords for the encryption change of
-    Firefox 144.
-  o Fixed a problem with getting the passwords of Opera.
-
-* Version 2.17:
-  o Updated to decrypt the passwords encrypted with app-bound
-    encryption on new versions of Chrome (Third version of the app-bound
-    encryption key).
-
-* Version 2.16:
-  o Updated to read the 'Login Data for Account' file of Google
-    Chrome. Chrome Web browser may store passwords in this file when
-    using a Chrome profile with Google account.
-
-* Version 2.15:
-  o Added support for decrypting passwords encrypted with app-bound
-    encryption on new versions of Chrome (Version 135). This feature only
-    works when you run WebBrowserPassView as Administrator (Ctrl+F11).
-
-* Version 2.13:
-  o Fixed a crash problem on Windows 11 24H2.
-
-* Version 2.12:
-  o Fixed to display the password of Chromium-based Web browser if
-    it's not encrypted (Like in the portable version of Brave).
-  o Updated to work properly in high DPI mode.
-
-* Version 2.11:
-  o Added new file type to save the passwords list: 'Firefox
-    import/export csv file'. When you save the passwords in this file
-    type, you can use the import feature of Firefox to import the saved
-    passwords into Firefox: Import login data from a file
-  o In order to save the passwords as 'Firefox import/export csv
-    file', simply select the items you want to save (or press Ctrl+A to
-    select all passwords), press Ctrl+S (Save Selected Items), choose
-    'Firefox import/export csv file' from the file type combo-box, type
-    the filename to save and then click the 'Save' button to save the
-    file.
-
-* Version 2.10:
-  o Added support for Brave Web browser.
-
-* Version 2.07:
-  o Fixed to decrypt passwords of Firefox profile that uses both 3DES
-    and AES-256.
-
-* Version 2.06:
-  o Fixed WebBrowserPassView to decrypt the new password encryption
-    on Opera Web browser
-
-* Version 2.05:
-  o Added support for decrypting the encryption key of new Firefox
-    profiles (AES-256 instead of 3DES).
-
-* Version 2.00:
-  o Added support for the new password encryption of Chromium /
-    Chrome Web browsers, starting from version 80.
-  o Be aware that the 'Local State' file, located inside the 'User
-    Data' folder, is needed for decrypting the passwords of Chrome 80 or
-    later.
-
-* Version 1.94:
-  o Added new file format to export the passwords: Chrome CSV File.
-    It's the same file format that Chrome Web browser exports the
-    passwords from chrome://settings/passwords
-
-* Version 1.93:
-  o Added support for Chromium-Based Edge Web browser.
-  o The download zip file is now password-protected.
-
-* Version 1.92:
-  o Fixed bug: WebBrowserPassView could crash when decrypting empty
-    passwords in Firefox.
-  o WebBrowserPassView now automatically detects the Waterfox Web
-    browser.
-
-* Version 1.91:
-  o Fixed bug: WebBrowserPassView crashed when reading Firefox key
-    file (key3.db) without a master key.
-
-* Version 1.90:
-  o Fixed WebBrowserPassView to work with Firefox 64-bit, and also
-    WebBrowserPassView doesn't need anymore the installation of Firefox
-    to decrypt the passwords. This change also fixes a crash problem
-    occurred on some systems.
-
-* Version 1.86:
-  o Added 'Quick Filter' feature (View -> Use Quick Filter or
-    Ctrl+Q). When it's turned on, you can type a string in the text-box
-    added under the toolbar and WebBrowserPassView will instantly filter
-    the passwords table, showing only lines that contain the string you
-    typed.
-
-* Version 1.85:
-  o In 'Advanced Options' window, you can now specify the base
-    profiles folder for Firefox and Chrome (e.g:
-    E:\Users\user1\AppData\Roaming\Mozilla\Firefox\Profiles ) and
-    WebBrowserPassView will scan all profiles stored under the specified
-    folder.
-
-* Version 1.82:
-  o Added 'Filename' column (For Chrome and Firefox Web browsers).
-
-* Version 1.81:
-  o Added support for Vivaldi Web browser.
-
-* Version 1.80:
-  o Finally... Fixed a crash problem occurred on some Windows 10
-    systems (The problem occurred if you added Gmail or other email
-    account into Windows 10 Mail application). Also, WebBrowserPassView
-    now displays the modified time of IE10/IE11 items.
-
-* Version 1.75:
-  o You can now choose the desired encoding (ANSI, UTF-8, UTF-16) to
-    save the csv/xml/text/html files. (Under the Options menu)
-  o Fixed problem with saving the KeePass csv file.
-
-* Version 1.70:
-  o WebBrowserPassView now automatically detect the passwords of
-    Yandex Web browser.
-
-* Version 1.68:
-  o Another try to fix this mysterious Windows 10 crash problem, also
-    added more debug info to /debugwin10
-
-* Version 1.67:
-  o Made another fix for Windows 10 crash problem...
-
-* Version 1.66:
-  o Made a small change in the password extraction of
-    IE10/IE11/Microsoft Edge that hopefully will solve the crash problems
-    occur on some Windows 10 systems.
-  o If you have Windows 10 and WebBrowserPassView still crashes,
-    please run WebBrowserPassView with /debugwin10 parameter, run also
-    the DebugView tool of SysInternals, and then send me the last 4 debug
-    lines that appeared before the crash.
-
-* Version 1.65:
-  o Added 'Created Time' and 'Modified Time' columns (These columns
-    are active only for Web browesers that provide this information).
-
-* Version 1.60:
-  o WebBrowserPassView now automatically detects the passwords of
-    Portable Firefox if it's running in the background.
-
-* Version 1.58:
-  o Fixed WebBrowserPassView to display properly user name/password
-    with non-English characters on Chrome Web browser.
-
-* Version 1.57:
-  o WebBrowserPassView now detects the profile folder of Chromium Web
-    browser.
-
-* Version 1.56:
-  o Removed the command-line options that export the passwords to a
-    file from the official version. A version of this tool with full
-    command-line support will be posted on separated Web page.
-
-* Version 1.55:
-  o Added support for Firefox 32 (logins.json).
-
-* Version 1.50:
-  o Updated to work with the latest versions of Opera.
-
-* Version 1.46:
-  o Added secondary sorting support: You can now get a secondary
-    sorting, by holding down the shift key while clicking the column
-    header. Be aware that you only have to hold down the shift key when
-    clicking the second/third/fourth column. To sort the first column you
-    should not hold down the Shift key.
-
-* Version 1.45:
-  o Added support for SeaMonkey Web browser.
-
-* Version 1.43:
-  o Fixed to work with Firefox 22.
-
-* Version 1.42:
-  o Opera Web browser: Fixed to detect properly the passwords of
-    login.live.com and probably other Web sites
-
-* Version 1.41:
-  o Improved the password decryption on IE10 / Windows 7.
-
-* Version 1.40:
-  o Added support for the passwords of Internet Explorer 10.
-
-* Version 1.37:
-  o WebBrowserPassView now reads the passwords from all profiles of
-    Chrome Web browser.
-
-* Version 1.36:
-  o Fixed bug: WebBrowserPassView failed to work with master password
-    of Firefox containing non-English characters.
-
-* Version 1.35:
-  o WebBrowserPassView now extracts the passwords from all profiles
-    of Firefox Web browser and reads the profiles.ini file of Firefox to
-    get the correct profile folders.
-  o Added 'Mark Odd/Even Rows' option, under the View menu. When it's
-    turned on, the odd and even rows are displayed in different color, to
-    make it easier to read a single line.
-  o Fixed issue: The properties dialog-box and other windows opened
-    in the wrong monitor, on multi-monitors system.
-
 * Version 1.30:
-  o Add new command-line options: /LoadPasswordsIE ,
-    /LoadPasswordsFirefox , /LoadPasswordsChrome , /LoadPasswordsOpera ,
-    and more...
+  o Updated to detect Android and Windows operating systems from DHCP
+    requests.
+  o Added 'Black Background' option (Under the View menu). When it's
+    turned on, the main table is displayed in black background and white
+    text, instead of default system colors.
+  o Updated the internal MAC addresses file.
+
+* Version 1.28:
+  o Fixed bug: WhoIsConnectedSniffer displayed random external IP
+    address for the router, instead of the actual IP address.
+
+* Version 1.27:
+  o Added 'Beep On New Item' option (Under the Options menu).
+  o Updated the internal MAC addresses file.
 
 * Version 1.26:
-  o Fixed bug: WebBrowserPassView failed to get the passwords of
-    Firefox and Chrome, if the path of their password file contained
-    non-English characters.
+  o Updated the internal MAC addresses file.
 
 * Version 1.25:
-  o Added 'User Name Field' and 'Password Field' columns for Chrome,
-    Firefox, and Opera Web browsers.
+  o Added 'Load From Capture File' option, which allows you to load
+    the list of computers and devices on your network from a capture file
+    (WinPcap capture file or Microsoft Network Monitor 3.x capture file).
+
+* Version 1.21:
+  o Updated the internal MAC addresses file.
 
 * Version 1.20:
-  o Added 'Password Strength' column, which calculates the strength
-    of the password and displays it as Very Weak, Weak, Medium, Strong,
-    or Very Strong.
+  o You can now save the devices list detected on your network from
+    command-line, without displaying any user interface.
 
 * Version 1.15:
-  o Added support for Safari Web browser (passwords are decrypted
-    from keychain.plist)
+  o Updated the internal MAC addresses file.
+
+* Version 1.14:
+  o The information of the selected network adapter is now displayed
+    in the window title.
+
+* Version 1.13:
+  o WhoIsConnectedSniffer now automatically loads the new version of
+    WinPCap driver from https://nmap.org/npcap/ if it's installed on your
+    system.
 
 * Version 1.12:
-  o WebBrowserPassView now automatically extracts the passwords of
-    Chrome Canary.
+  o Updated the internal MAC addresses file.
 
-* Version 1.11:
-  o The passwords of Chrome Web browser are now displayed properly
-    even when the password file is locked by Chrome.
+* Version 1.11
+  o Added 4 columns to the adapters list in the 'Capture Options'
+    window: 'Connection Name', 'MAC Address', 'Instance ID', 'Interface
+    Guid'.
+  o When using WinPCap driver , WhoIsConnectedSniffer now displays
+    more accurate information in the adapters list of the 'Capture
+    Options' window.
+  o WhoIsConnectedSniffer now tries to load the dll of Network
+    Monitor Driver 3.x (NmApi.dll) according to the installation path
+    specified in HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Netmon3. This
+    change should solve the problem with loading the Network Monitor
+    Driver 3.x on some systems.
 
 * Version 1.10:
-  o Added option to choose the desired Opera password file (wand.dat).
-  o Imporved the detection of Opera password file (wand.dat).
+  o Updated the internal MAC addresses file.
+
+* Version 1.09:
+  o Fixed bug: WhoIsConnectedSniffer failed to remember the last
+    size/position of the main window if it was not located in the primary
+    monitor.
+  o Added support for detection of Windows 10.
+
+* Version 1.08:
+  o Added 'Copy MAC Address' option.
+
+* Version 1.07:
+  o Updated the internal MAC addresses file, and reduced its size
+    inside the .exe file.
+
+* Version 1.06:
+  o Added 'MAC Address Format' option (XX-XX-XX-XX-XX-XX,
+    XX:XX:XX:XX:XX:XX, or XXXXXXXXXXXX).
 
 * Version 1.05:
-  o Added new options for Firefox passwords: Use a master password to
-    decrypt the passwords, Load the passwords from the specified profile
-    folder, and the option to use the specified Firefox installation.
-  o Added option specify the profile folder (User Data) of Google
-    Chrome (For example: C:\Documents and Settings\Administrator\Local
-    Settings\Application Data\Google\Chrome\User Data\Default)
-    Be aware that this feature only works if the profile was created by
-    the current logged on user. Loading from external drive is not
-    supported yet.
+  o Added 'Sort On Every Update' option. If it's turned on,
+    WhoIsConnectedSniffer will sort the list every time that a new item
+    is added or an existing item is updated.
+  o Fixed the Ctrl+X accelerator key to work.
+  o WhoIsConnectedSniffer now updates the items count on the bottom
+    status bar when a new item is added.
 
 * Version 1.00 - First release.
 
 
 
-Using WebBrowserPassView
-========================
+Start Using WhoIsConnectedSniffer
+=================================
 
-WebBrowserPassView doesn't require any installation process or additional
-DLL files. In order to start using it, simply run the executable file -
-WebBrowserPassView.exe
+Except of the capture driver, WhoIsConnectedSniffer doesn't require any
+installation process or additional dll files. In order to start using it,
+simply run the executable file - WhoIsConnectedSniffer.exe
+After running WhoIsConnectedSniffer in the first time, you should choose
+the correct capture driver and the network adapter you want to use.
+After you choose the desired capture driver and the network adapter,
+WhoIsConnectedSniffer starts to listen the packets on your network
+adapter and updates the main window when a device or computer is detected.
 
-After running it, the main window of WebBrowserPassView displays the list
-of all Web browser passwords found in your system. You can select one or
-more passwords and then copy the list to the clipboard (Ctrl+C) or export
-them into text/xml/html/csv file (Ctrl+S).
+You have to wait from a few seconds to a few minutes until the first
+computers/devices appear on the main window of WhoIsConnectedSniffer.
+
+After collecting the connected computers/devices information, you can
+easily export the list to tab-delimited/comma-delimited/xml/html file by
+selecting all items (Ctrl+A), and then using the 'Save Selected Items'
+option (Ctrl+S).
 
 
 
-False Virus/Trojan Warning
-==========================
+Protocols supported by WhoIsConnectedSniffer
+============================================
 
-WebBrowserPassView is a tool that retrieves secret passwords stored in
-your system, and thus your Antivirus may falsely detect this tool is
-infected with Trojan/Virus. Click here to read more about false alerts in
-Antivirus programs.
+
+* ARP: WhoIsConnectedSniffer listens to this protocol to get the IP
+  address and MAC address of computers and devices.
+* UDP: When a computer broadcasts a UDP packet to all other computers,
+  WhoIsConnectedSniffer extracts from it the IP address and the MAC
+  address.
+* DHCP: When a computer connects to the network, it usually sends a
+  DHCP request. WhoIsConnectedSniffer uses this request to get the host
+  name and IP address of the computer.
+* mDNS: This protocol is used on Linux and Mac OS systems.
+  WhoIsConnectedSniffer uses it to get the host name and IP address of
+  the computer, and also the operating system (on Linux)
+* BROWSER: This protocol is mainly used by Windows, but some Linux
+  systems supports this protocol too. WhoIsConnectedSniffer uses it to
+  get the name of the computer, description text of the computer, and the
+  operating system.
 
 
 
 Command-Line Options
 ====================
 
-Notice: The save command-line options are disabled on the build you
-download from this Web page. You can find a package of password-recovery
-tools with full command-line support on the following Web page: Windows
-Password Recovery Tools
 
 
+/cfg <Filename>
+Start WhoIsConnectedSniffer with the specified configuration file. For
+example:
+WhoIsConnectedSniffer.exe /cfg "c:\config\wcs.cfg"
+WhoIsConnectedSniffer.exe /cfg "%AppData%\WhoIsConnectedSniffer.cfg"
 
-/LoadPasswordsIE <0 | 1>
-Specifies whether to load the passwords of Internet Explorer Web browser.
-0 = No, 1 = Yes.
+/CaptureTime <Time In Seconds>
+Specifies the number of seconds to capture the traffic, when using one of
+the save command-line options (/stext, /stab, and so on...)
+If you don't specify this command-line option, the default capture time
+is 10 seconds. If you specify '0', the capture will continue until
+running WhoIsConnectedSniffer with /StopCommandLineCapture command-line
+option.
 
-/LoadPasswordsFirefox <0 | 1>
-Specifies whether to load the passwords of Firefox Web browser. 0 = No, 1
-= Yes.
+/LoadConfig <Config File>
+Loads the specified configuration file.
 
-/LoadPasswordsChrome <0 | 1>
-Specifies whether to load the passwords of Chrome Web browser. 0 = No, 1
-= Yes.
+/SaveToFileInterval <Time In Seconds>
+Saves the capture result every xx seconds.
 
-/LoadPasswordsOpera <0 | 1>
-Specifies whether to load the passwords of Opera Web browser. 0 = No, 1 =
-Yes.
-
-/LoadPasswordsSafari <0 | 1>
-Specifies whether to load the passwords of Safari Web browser. 0 = No, 1
-= Yes.
-
-/UseFirefoxProfileFolder <0 | 1>
-/FirefoxProfileFolder <Folder>
-Specifies the profile folder of Firefox to load, for example:
-WebBrowserPassView.exe /UseFirefoxProfileFolder 1 /FirefoxProfileFolder
-"C:\Documents and Settings\admin\Application
-Data\Mozilla\Firefox\Profiles\7a2ttm2u.default"
-
-/UseFirefoxInstallFolder <0 | 1>
-/FirefoxInstallFolder <Folder>
-Specifies the installation folder of Firefox to use, for example:
-WebBrowserPassView.exe /UseFirefoxInstallFolder 1 /FirefoxInstallFolder
-"C:\Program Files\Mozilla Firefox"
-
-/UseChromeProfileFolder <0 | 1>
-/ChromeProfileFolder <Folder>
-Specifies the profile folder of Chrome Web browser to load.
-
-/UseOperaPasswordFile <0 | 1>
-/OperaPasswordFile <Password>
-Specifies the master password of Opera, for example:
-WebBrowserPassView.exe /UseOperaPasswordFile 1 /OperaPasswordFile
-"Thgr55f6"
+/StopCommandLineCapture
+Stops a command-line capture that is currently running and saves all
+captured information to a file
 
 /stext <Filename>
-Save the passwords list into a regular text file.
+Save the connected devices list into a simple text file.
 
 /stab <Filename>
-Save the passwords list into a tab-delimited text file.
+Save the connected devices list into a tab-delimited text file.
 
 /scomma <Filename>
-Save the passwords list into a comma-delimited text file (csv).
+Save the connected devices list into a comma-delimited text file (csv).
 
 /stabular <Filename>
-Save the passwords list into a tabular text file.
+Save the connected devices list into a tabular text file.
 
 /shtml <Filename>
-Save the passwords list into HTML file (Horizontal).
+Save the connected devices list into HTML file (Horizontal).
 
 /sverhtml <Filename>
-Save the passwords list into HTML file (Vertical).
+Save the connected devices list into HTML file (Vertical).
 
 /sxml <Filename>
-Save the passwords list into XML file.
-
-/skeepass <Filename>
-Save the passwords list into csv file that can be imported into KeePass
-Password Manager.
+Save the connected devices list into XML file.
 
 /sort <column>
 This command-line option can be used with other save options for sorting
@@ -412,56 +257,54 @@ by the desired column. If you don't specify this option, the list is
 sorted according to the last sort that you made from the user interface.
 The <column> parameter can specify the column index (0 for the first
 column, 1 for the second column, and so on) or the name of the column,
-like "URL" and "Web Browser". You can specify the '~' prefix character
-(e.g: "~Web Browser") if you want to sort in descending order. You can
-put multiple /sort in the command-line if you want to sort by multiple
-columns.
-
-Examples:
-WebBrowserPassView.exe /shtml "f:\temp\passwords.html" /sort 2 /sort ~1
-WebBrowserPassView.exe /shtml "f:\temp\passwords.html" /sort "Web
-Browser" /sort "URL"
-
-/nosort
-When you specify this command-line option, the list will be saved without
-any sorting.
+like "IP Address" and "First Detected On". You can specify the '~' prefix
+character (e.g: "~Last Detected On") if you want to sort in descending
+order. You can put multiple /sort in the command-line if you want to sort
+by multiple columns.
 
 
 
-Translating WebBrowserPassView to other languages
-=================================================
+Command-line Examples:
+WhoIsConnectedSniffer.exe /shtml c:\temp\connected-devices-list.html
+/CaptureTime 120 /SaveToFileInterval 10 /Sort "Name"
+WhoIsConnectedSniffer.exe /cfg c:\temp\config1.cfg /scomma
+c:\temp\traffic.csv /Sort "~Last Detected On"
+WhoIsConnectedSniffer.exe /shtml c:\temp\traffic.html /CaptureTime 0
+/SaveToFileInterval 15
 
-In order to translate WebBrowserPassView to other language, follow the
+
+
+Translating WhoIsConnectedSniffer to other languages
+====================================================
+
+In order to translate WhoIsConnectedSniffer to other language, follow the
 instructions below:
-1. Run WebBrowserPassView with /savelangfile parameter:
-   WebBrowserPassView.exe /savelangfile
-   A file named WebBrowserPassView_lng.ini will be created in the folder
-   of WebBrowserPassView utility.
+1. Run WhoIsConnectedSniffer with /savelangfile parameter:
+   WhoIsConnectedSniffer.exe /savelangfile
+   A file named WhoIsConnectedSniffer_lng.ini will be created in the
+   folder of WhoIsConnectedSniffer utility.
 2. Open the created language file in Notepad or in any other text
    editor.
 3. Translate all string entries to the desired language. Optionally,
    you can also add your name and/or a link to your Web site.
    (TranslatorName and TranslatorURL values) If you add this information,
    it'll be used in the 'About' window.
-4. After you finish the translation, Run WebBrowserPassView, and all
-   translated strings will be loaded from the language file.
-   If you want to run WebBrowserPassView without the translation, simply
-   rename the language file, or move it to another folder.
+4. After you finish the translation, Run WhoIsConnectedSniffer, and
+   all translated strings will be loaded from the language file.
+   If you want to run WhoIsConnectedSniffer without the translation,
+   simply rename the language file, or move it to another folder.
 
 
 
 License
 =======
 
-This utility is released as freeware. You are allowed to freely use it at
-your home or in your company. However, you are not allowed to make profit
-from this software or to charge your customers for recovering their
-passwords with this software, unless you got a permission from the
-software author.
-You are also allowed to freely distribute this utility via floppy disk,
-CD-ROM, Internet, or in any other way, as long as you don't charge
-anything for this. If you distribute this utility, you must include all
-files in the distribution package, without any modification !
+This utility is released as freeware. You are allowed to freely
+distribute this utility via floppy disk, CD-ROM, Internet, or in any
+other way, as long as you don't charge anything for this and you don't
+sell it or distribute it as a part of commercial product. If you
+distribute this utility, you must include all files in the distribution
+package, without any modification !
 
 
 

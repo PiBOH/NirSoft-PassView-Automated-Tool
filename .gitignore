@@ -1,0 +1,37 @@
+# NirSoft Password Recovery USB Collector — .gitignore
+# https://www.nirsoft.net/password_recovery_tools.html
+
+# --- Runtime outputs (regenerated on every collector run) ---
+# Timestamp folders like results/20260721_212853/ created by collector.ps1
+results/[0-9]*_[0-9]*/
+# results/readme.txt is project documentation and is intentionally committed
+
+# --- Diagnostic scratch ---
+# Working area for probe scripts and intermediate logs created during development
+results/_dryrun_cli_test/
+
+# --- Backup / scratch directories ---
+# .bkp/ mirrors the project for safety nets; do NOT version
+.bkp/
+
+# --- NirSoft downloaded archives ---
+# tools/zip/ contains the all-in-one NirSoft password-tools archive that we
+# extract NirSoft EXEs from. Re-downloadable, large, does not belong in git.
+tools/zip/
+
+# --- Backup files (safety net) ---
+# Defensive: ignore any .bak / .BAK / .backup / .bkp files anywhere in the tree.
+# (An already-tracked scripts/collector.ps1.BAK stays tracked; this rule only
+# prevents ADDITIONAL such files from being staged.)
+*.bak
+*.BAK
+*.backup
+*.bkp
+
+# --- OS / editor cruft ---
+Thumbs.db
+.DS_Store
+*.swp
+*~
+.vs/
+.idea/
