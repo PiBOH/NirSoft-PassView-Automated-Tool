@@ -2,8 +2,15 @@
 # https://www.nirsoft.net/password_recovery_tools.html
 
 # --- Runtime outputs (regenerated on every collector run) ---
-# Timestamp folders like results/20260721_212853/ created by collector.ps1
-results/[0-9]*_[0-9]*/
+# Rich-format folder created by collector.ps1 with date + time + PC + (User)
+# suffix. This is the ONLY physical folder the script creates per run (an
+# earlier date-only mirror folder was removed).
+# Example: results/20260722_111250 ASUSi7-K55VD (Utente)/
+# Pattern: 8 digits + _ + 6 digits + space + any + ( + any + ) + trailing /.
+results/[0-9]*_[0-9]* *(*)*/
+# Diagnostic-report folders created by scripts\report.bat
+# Example: results/IpConfigReport_20260722_111250/
+results/IpConfigReport_*/
 # results/readme.txt is project documentation and is intentionally committed
 
 # --- Diagnostic scratch ---
